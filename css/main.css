@@ -35,3 +35,66 @@ header {
     line-height: 20px;
     padding: 9px 20px;
 }
+
+section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 90%;
+    height: 60vh;
+    margin: auto;
+}
+
+.divScore {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid black;
+    border-radius: 20px;
+    box-shadow: 0px 10px 0px 0px rgba(0, 0, 0, 1);
+    background-color: var(--white);
+    padding: 2.8rem 1.75rem 1rem 1.75rem;
+}
+
+.imgPlayer {
+    position: absolute;
+    bottom: 79%;
+
+}
+
+h2 {
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 25.52px;
+    color: var(--black);
+}
+
+.score {
+    font-weight: 700;
+    font-size: 56px;
+    line-height: 71.46px;
+    color: var(--black);
+}
+
+.imgGrid {
+    z-index: 2;
+    position: absolute;
+    top: 20%;
+    left: 30%;
+}
+
+.grid {
+    z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(7, 75px);
+    grid-template-columns: repeat(7, 75px);
+}
+
+.imgShadowGrid {
+    z-index: 0;
+    position: absolute;
+    top: 20%;
+    left: 30%;
+}
