@@ -86,8 +86,8 @@ h2 {
     display: grid;
     gap: 13px;
     position: absolute;
-    top: 22%;
-    left: 31%;
+    top: 21.8%;
+    left: 30.9%;
     justify-content: space-between;
     grid-template-columns: repeat(7, 75px);
     grid-template-rows: repeat(6, 75px);
@@ -104,4 +104,75 @@ h2 {
     position: absolute;
     top: 20%;
     left: 30%;
+}
+
+.divFooter {
+    height: 250px;
+    background-color: var(--secondary-color);
+    border-radius: 60px 60px 0 0;
+}
+
+.chronometre1, .chronometre2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 90%;
+    left: 44%;
+    z-index: 3;
+    width: 12%;
+    margin: auto;
+    text-align: center;
+    background-color: var(--player-one);
+    padding: 1.5rem 0;
+    border: 3px solid black;
+    border-radius: 40px;
+    box-shadow: 0px 10px 0px 0px rgba(0, 0, 0, 1);
+}
+
+.chronometre2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 90%;
+    left: 44%;
+    z-index: 3;
+    width: 12%;
+    margin: auto;
+    text-align: center;
+    background-color: var(--player-two);
+    padding: 1.5rem 0;
+    border: 3px solid black;
+    border-radius: 40px;
+    box-shadow: 0px 10px 0px 0px rgba(0, 0, 0, 1);
+}
+
+.chronoPlayer1H2 {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20.42px;
+}
+
+.chronoPlayer2H2 {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20.42px;
+    color: white;
+}
+
+.chronoPointPlayer1, span {
+    font-weight: 700;
+    font-size: 56px;
+    line-height: 71.46px;
+    color: white;
+}
+
+.chronoPointPlayer2, span {
+    font-weight: 700;
+    font-size: 56px;
+    line-height: 71.46px;
+    color: white;
 }
