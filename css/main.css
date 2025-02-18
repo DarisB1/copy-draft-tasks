@@ -13,7 +13,6 @@
 body {
     background-color: #7945FF;
     font-family: "Space Grotesk", serif;
-
 }
 
 header {
@@ -40,9 +39,8 @@ section {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 90%;
     height: 60vh;
-    margin: auto;
+    padding: 0 1.5rem;
 }
 
 .divScore {
@@ -61,7 +59,6 @@ section {
 .imgPlayer {
     position: absolute;
     bottom: 79%;
-
 }
 
 h2 {
@@ -86,10 +83,20 @@ h2 {
 }
 
 .grid {
-    z-index: 1;
     display: grid;
+    gap: 13px;
+    position: absolute;
+    top: 22%;
+    left: 31%;
+    justify-content: space-between;
     grid-template-columns: repeat(7, 75px);
-    grid-template-columns: repeat(7, 75px);
+    grid-template-rows: repeat(6, 75px);
+}
+
+.btnGrid {
+    z-index: 1;
+    border: none;
+    border-radius: 50%;
 }
 
 .imgShadowGrid {
