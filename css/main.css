@@ -465,6 +465,7 @@ li {
     font-weight: 700;
     font-size: 24px;
     line-height: 30.62px;
+    text-align: start;
     color: var(--black);
     width: 22%;
 }
