@@ -15,7 +15,26 @@
         <button class="headerBtn">RESTART</button>
     </header>
     <main>
-        <section>
+        <section class="secRule">
+            <div class="cardRules">
+                <h2 class="rulesH2">RULES</h2>
+                <hgroup>
+                    <h3>OBJECTIVE</h3>
+                    <p class="pObjectif">Be the first player to connect 4 of the same colored discs in a row (either vertically, horizontally, or diagonally).</p>
+                </hgroup>
+                <div class="divH3Ol">
+                    <h3>HOW TO PLAY</h3>
+                    <ol>
+                        <li>Red goes first in the first game.</li>
+                        <li>Players must alternate turns, and only one disc can be dropped in each turn. </li>
+                        <li>The game ends when there is a 4-in-a-row or a stalemate.</li>
+                        <li>The starter of the previous game goes second on the next game.</li>
+                    </ol>
+                </div>
+            <button class="check"><img src="./assets/check.svg" alt="check"></button>
+            </div>
+        </section>
+        <section class="secJeu">
             <div class="divScore">
                 <img class="imgPlayer" src="./assets/player-one.svg" alt="player one">
                 <h2>PLAYER 1</h2>
@@ -76,13 +95,18 @@
             </div>
         </section>
         <div class="divFooter">
-            <div class="chronometre1">
+            <!-- <div class="chronometre1">
                 <h2 class="chronoPlayer1H2">PLAYER 1'S TURN</h2>
                 <p class="chronoPointPlayer1"><span>0</span>s</p>
             </div>            
             <div class="chronometre2">
                 <h2 class="chronoPlayer2H2">PLAYER 2'S TURN</h2>
                 <p class="chronoPointPlayer2"><span>0</span>s</p>
+            </div> -->
+            <div class="winPlayer">
+                <h2 class="winH2">PLAYER 1</h2>
+                <p class="winP">WINS</p>
+                <button class="btnReplay">PLAY AGAIN</button>
             </div>
         </div>         
     </main>
