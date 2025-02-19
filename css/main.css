@@ -130,6 +130,8 @@ h2 {
 }
 
 .divFooter {
+    display: none;
+    flex-direction: column;
     height: 250px;
     background-color: var(--secondary-color);
     border-radius: 60px 60px 0 0;
@@ -336,7 +338,7 @@ li {
 /* div pause */
 
 .divPause {
-    display: flex;
+    display: none;
     flex-direction: column;
     position: absolute;
     top: 28%;
@@ -397,4 +399,72 @@ li {
     border: 3px solid var(--secondary-color);
     box-shadow: 0px 10px 0px 0px var(--secondary-color);
 
+}
+
+/* section menu */
+
+.secMenu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 4;
+    width: 100%;
+    height: 100vh;
+    background-color: var(--secondary-color);
+}
+
+.divTotalMenu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5rem;
+    width: 30%;
+    border: 3px solid var(--black);
+    border-radius: 40px;
+    padding: 4rem 2.5rem;
+    background-color: var(--primary-color);
+    box-shadow: 0px 10px 0px 0px rgba(0, 0, 0, 1);
+
+}
+
+.divBtnMenu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    width: 100vw;
+}
+
+.btnPlay {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    background-color: var(--player-two);
+    border: 3px solid var(--black);
+    border-radius: 20px;
+    box-shadow: 0px 10px 0px 0px rgba(0, 0, 0, 1);
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 30.62px;
+    color: var(--black);
+    width: 22%;
+}
+
+.btnRules {
+    padding: 1rem;
+    background-color: var(--white);
+    border: 3px solid var(--black);
+    border-radius: 20px;
+    box-shadow: 0px 10px 0px 0px rgba(0, 0, 0, 1);
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 30.62px;
+    color: var(--black);
+    width: 22%;
 }
