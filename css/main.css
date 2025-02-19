@@ -13,7 +13,7 @@
 .opacity {
     display: none;
     width: 100%;
-    height: 114vh;
+    height: 100vh;
     background-color: #000;
     opacity: 0.8;
     z-index: 4;
@@ -51,9 +51,11 @@ header {
 
 .secJeu {
     display: flex;
+    flex-direction: row;
     align-items: center;
-    justify-content: space-between;
-    height: 60vh;
+    justify-content: center;
+    height: 70vh;
+    gap: 60px;
     padding: 0 1.5rem;
 }
 
@@ -89,44 +91,46 @@ h2 {
     color: var(--black);
 }
 
+.secLayer {
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
 .imgGrid {
     z-index: 2;
     position: absolute;
-    top: 20%;
-    left: 30%;
+    top: 0;
+    left: 0;
 }
 
 .grid {
     display: grid;
-    gap: 13px;
-    position: absolute;
-    top: 21.8%;
-    left: 30.9%;
-    justify-content: space-between;
-    grid-template-columns: repeat(7, 75px);
-    grid-template-rows: repeat(6, 75px);
+    gap: 24px;
+    grid-template-columns: repeat(7, 1fr);
+    padding: 20px;
 }
 
 .divGridColumn {
-    z-index: 1;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 24px;
 }
 
 .btnGrid {
     z-index: 1;
     border: none;
     border-radius: 50%;
+    width: 64px;
+    height: 64px;
     /* background-color: transparent; */
-
 }
 
 .imgShadowGrid {
     z-index: 0;
     position: absolute;
-    top: 20%;
-    left: 30%;
+    top: 0;
+    left: 0;
 }
 
 .divFooter {
@@ -250,13 +254,12 @@ h2 {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 10vh;
+    height: 100vh;
     position: absolute;
     top: 0;
     left: 0;
     background-color: var(--primary-color);
     width: 100%;
-    height: 120vh;
     z-index: 4;
 }
 
@@ -318,10 +321,20 @@ ol {
 }
 
 li {
+    display: flex;
+    align-items: center;
+    gap: 19px;
     font-weight: 500;
     font-size: 16px;
     line-height: 20.42px;
     color: #000;
+}
+
+.spanLi {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20.42px;
+    color: var(--black);
 }
 
 .check {
@@ -404,7 +417,7 @@ li {
 /* section menu */
 
 .secMenu {
-    display: flex;
+    display: none;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -440,7 +453,7 @@ li {
     width: 100vw;
 }
 
-.btnPlay {
+.btnPlay, .btnRules {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -457,15 +470,5 @@ li {
 }
 
 .btnRules {
-    padding: 1rem;
     background-color: var(--white);
-    border: 3px solid var(--black);
-    border-radius: 20px;
-    box-shadow: 0px 10px 0px 0px rgba(0, 0, 0, 1);
-    font-weight: 700;
-    font-size: 24px;
-    line-height: 30.62px;
-    text-align: start;
-    color: var(--black);
-    width: 22%;
 }

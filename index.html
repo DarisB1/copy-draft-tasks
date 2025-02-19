@@ -11,7 +11,7 @@
 <body>
     <div class="opacity"></div>
     <header>
-        <button class="headerBtn">MENU</button>
+        <button class="headerBtn" id="menu">MENU</button>
         <img src="./assets/logoBase.svg" alt="logoBase">
         <button class="headerBtn">RESTART</button>
     </header>
@@ -38,10 +38,10 @@
                 <div class="divH3Ol">
                     <h3>HOW TO PLAY</h3>
                     <ol>
-                        <li>Red goes first in the first game.</li>
-                        <li>Players must alternate turns, and only one disc can be dropped in each turn. </li>
-                        <li>The game ends when there is a 4-in-a-row or a stalemate.</li>
-                        <li>The starter of the previous game goes second on the next game.</li>
+                        <li><span class="spanLi">1</span>Red goes first in the first game.</li>
+                        <li><span class="spanLi">2</span>Players must alternate turns, and only one disc can be dropped in each turn. </li>
+                        <li><span class="spanLi">3</span>The game ends when there is a 4-in-a-row or a stalemate.</li>
+                        <li><span class="spanLi">4</span>The starter of the previous game goes second on the next game.</li>
                     </ol>
                 </div>
             <button class="check"><img src="./assets/check.svg" alt="check"></button>
@@ -53,11 +53,11 @@
                 <h2>PLAYER 1</h2>
                 <p class="score">0</p>
             </div>
-            <div>
+            <section class="secLayer">
                 <img class="imgGrid" src="./assets/gird.svg" alt="grid">
                 <div class="grid">
                     <div class="divGridColumn">
-                        <button class="btnGrid"><img src="./assets/counter-yellow-large.svg" alt=""></button>
+                        <button class="btnGrid"><img src="" alt=""></button>
                         <button class="btnGrid"><img src="" alt=""></button>
                         <button class="btnGrid"><img src="" alt=""></button>
                         <button class="btnGrid"><img src="" alt=""></button>
@@ -114,7 +114,7 @@
                     </div>
                 </div>
                 <img class="imgShadowGrid" src="./assets/shadowGrid.svg" alt="shadowGrid">
-            </div>
+            </section>
             <div class="divScore">
                 <img class="imgPlayer" src="./assets/player-two.svg" alt="player two">
                 <h2>PLAYER 2</h2>
@@ -122,14 +122,14 @@
             </div>
         </section>
         <div class="divFooter">
-            <!-- <div class="chronometre1">
+            <div class="chronometre1">
                 <h2 class="chronoPlayer1H2">PLAYER 1'S TURN</h2>
                 <p class="chronoPointPlayer1"><span>0</span>s</p>
             </div>            
             <div class="chronometre2">
                 <h2 class="chronoPlayer2H2">PLAYER 2'S TURN</h2>
                 <p class="chronoPointPlayer2"><span>0</span>s</p>
-            </div> -->
+            </div>
             <div class="winPlayer">
                 <h2 class="winH2">PLAYER 1</h2>
                 <p class="winP">WINS</p>
