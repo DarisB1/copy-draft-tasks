@@ -10,6 +10,18 @@
     --white: #fff;
 }
 
+.opacity {
+    display: none;
+    width: 100%;
+    height: 114vh;
+    background-color: #000;
+    opacity: 0.8;
+    z-index: 4;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
 body {
     background-color: #7945FF;
     font-family: "Space Grotesk", serif;
@@ -95,10 +107,19 @@ h2 {
     grid-template-rows: repeat(6, 75px);
 }
 
+.divGridColumn {
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
 .btnGrid {
     z-index: 1;
     border: none;
     border-radius: 50%;
+    /* background-color: transparent; */
+
 }
 
 .imgShadowGrid {
@@ -223,7 +244,7 @@ h2 {
 /* section règle */
 
 .secRule {
-    display: flex;
+    display: none;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -310,4 +331,70 @@ li {
     border-radius: 50%;
     border: 3px solid black;
     box-shadow: 0px 5px 0px 0px rgba(0, 0, 0, 1);
+}
+
+/* div pause */
+
+.divPause {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 28%;
+    left: 35%;
+    z-index: 5;
+    background-color: var(--primary-color);
+    border: 3px solid var(--black);
+    border-radius: 40px;
+    box-shadow: 0px 10px 0px 0px rgba(0, 0, 0, 1);
+    padding: 3rem 2.5rem;
+    gap: 15px;
+}
+
+.pauseH2 {
+    font-weight: 700;
+    font-size: 56px;
+    line-height: 71.46px;
+    text-align: center;
+    color: var(--white);
+}
+
+.divBtnPause {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.btnContinue, .btnRestart {
+    padding: 1.5rem 6rem;
+    background-color: var(--white);
+    border: 3px solid var(--black);
+    border-radius: 20px;
+    box-shadow: 0px 10px 0px 0px rgba(0, 0, 0, 1);
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 30.62px;
+}
+
+.btnContinue:hover, .btnRestart:hover {
+    border: 3px solid var(--secondary-color);
+    box-shadow: 0px 10px 0px 0px var(--secondary-color);
+
+}
+
+.btnQuit {
+    padding: 1rem;
+    background-color: var(--player-one);
+    border: 3px solid var(--black);
+    border-radius: 20px;
+    box-shadow: 0px 10px 0px 0px rgba(0, 0, 0, 1);
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 30.62px;
+    color: var(--white);
+}
+
+.btnQuit:hover {
+    border: 3px solid var(--secondary-color);
+    box-shadow: 0px 10px 0px 0px var(--secondary-color);
+
 }
