@@ -229,3 +229,18 @@ menu.addEventListener("click", () => {
         document.querySelector(".opacity").style.display = "none";
     });
 });
+
+let scorePlayerOne = 0;
+let scorePlayerTwo = 0;
+let currentPlayer = 0;
+let chronomètre = 30;
+let colonneSelec = null;
+const grille = [
+    [ "", "", "", "",  "", "", "" ],
+    [ "", "", "", "",  "", "", "" ],
+    [ "", "", "", "",  "", "", "" ],
+    [ "", "", "", "",  "", "", "" ],
+    [ "", "", "", "",  "", "", "" ],
+    [ "", "", "", "",  "", "", "" ]
+    ];
+
