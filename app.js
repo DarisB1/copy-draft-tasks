@@ -2,6 +2,11 @@ const menu = document.getElementById("menu");
 const btnRules = document.querySelector(".btnRules");
 const body = document.body;
 const secMenu = document.querySelector(".secMenu");
+const dialogPause = document.querySelector(".dialogPause")
+const opacity = document.querySelector(".opacity");
+
+
+
 
 function createContainer(classContainer = "", idContainer = "", type) {
 	const element = document.createElement(type);
@@ -29,6 +34,28 @@ function createImg(classImg = "", idImg = "", src, alt) {
 	img.alt = alt;
 
     return img 
+}
+
+function secPause() {
+    const dialog = createContainer("dialogPause", "", "dialog");
+
+    const h2 = createText("pauseH2", "", "PAUSE", "h2")
+    dialog.appendChild(h2);
+
+    const divBtnPause = createContainer("divBtnPause", "", "div")
+    dialog.appendChild(divBtnPause)
+
+    const btnContinue = createText("btnContinue", "", "CONTINUE GAME", "button");
+    divBtnPause.appendChild(btnContinue)
+
+    const btnRestart = createText("btnRestart", "", "RESTART", "button");
+    divBtnPause.appendChild(btnRestart)
+
+
+    const btnQuit = createText("btnQuit", "", "QUIT GAME", "button");
+    divBtnPause.appendChild(btnQuit)
+
+    body.appendChild(dialog);
 }
 
 function secRule() {
@@ -182,5 +209,23 @@ btnRules.addEventListener("click", () => {
     btnCheck.addEventListener("click", () => {
         document.querySelector(".secRule").style.display = "none";
         document.querySelector(".secMenu").style.display = "flex";
+    });
+});
+
+menu.addEventListener("click", () => {
+    let verifSecPause = document.querySelector(".dialogPause");
+
+    if (!verifSecPause) {
+        opacity.style.display = "flex";
+        secPause();
+    } else {
+        verifSecPause.style.display = "flex";
+        opacity.style.display = "flex";
+    }
+    const btnContinue = document.querySelector(".btnContinue");
+    
+    btnContinue.addEventListener("click", () => {
+        document.querySelector(".dialogPause").style.display = "none";
+        document.querySelector(".opacity").style.display = "none";
     });
 });
