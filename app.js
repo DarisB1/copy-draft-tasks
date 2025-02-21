@@ -225,7 +225,7 @@ menu.addEventListener("click", () => {
     const btnContinue = document.querySelector(".btnContinue");
     
     btnContinue.addEventListener("click", () => {
-        document.querySelector(".dialogPause").style.display = "none";
+        document.querySelector(".dialogPause").remove();
         document.querySelector(".opacity").style.display = "none";
     });
 });
