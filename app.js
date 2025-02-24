@@ -4,6 +4,16 @@ const secMenu = document.querySelector(".secMenu");
 const dialogPause = document.querySelector(".dialogPause");
 const opacity = document.querySelector(".opacity");
 const timerPara = document.querySelector(".chronoPointPlayer1");
+const divFooter = document.querySelector(".divFooter");
+
+let timer = setInterval(() => {
+    if (chronomètre > 0) {
+        chronomètre--;
+        timerPara.textContent = `${chronomètre}s`;
+    } else if (chronomètre == 0) {
+        clearInterval(timer);
+    }
+}, 1000);
 
 function createContainer(classContainer = "", idContainer = "", type) {
 	const element = document.createElement(type);
@@ -199,6 +209,42 @@ function sectionMenu() {
 
 sectionMenu()
 
+let scorePlayerOne = 0;
+let scorePlayerTwo = 0;
+let currentPlayer = 0;
+let chronomètre = 15;
+let colonneSelec = null;
+
+function startGame() {
+    clearInterval(timer);
+    timer = setInterval(() => {
+        if (chronomètre > 0) {
+            chronomètre--;
+            timerPara.textContent = `${chronomètre}s`;
+        } else if (chronomètre == 0) {
+            clearInterval(timer);
+        }
+    }, 1000);
+    scorePlayerOne = 0;
+    scorePlayerTwo = 0;
+    currentPlayer = 0;
+    chronomètre = 15;
+    colonneSelec = null;
+    let grille = [
+        ["", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", ""],
+    ];
+    let verifSecMenu = document.querySelector(".secMenu");
+
+	verifSecMenu.style.display = "none";
+
+    divFooter.style.display = "flex";
+}
+
 const btnRules = document.querySelector(".btnRules");
 const btnPlay = document.querySelector(".btnPlay");
 
@@ -223,6 +269,7 @@ btnRules.addEventListener("click", () => {
 });
 
 menu.addEventListener("click", () => {
+    clearInterval(timer)
 	let verifSecPause = document.querySelector(".dialogPause");
 
 	if (!verifSecPause) {
@@ -233,18 +280,28 @@ menu.addEventListener("click", () => {
 		opacity.style.display = "flex";
 	}
 	const btnContinue = document.querySelector(".btnContinue");
+	const btnRestart = document.querySelector(".btnRestart");
+	const btnQuit = document.querySelector(".btnQuit");
+
 
 	btnContinue.addEventListener("click", () => {
 		document.querySelector(".dialogPause").remove();
 		document.querySelector(".opacity").style.display = "none";
+        
+	});
+
+    btnRestart.addEventListener("click", () => {
+		startGame();
+        document.querySelector(".dialogPause").remove();
+		document.querySelector(".opacity").style.display = "none";
+	});
+
+    btnQuit.addEventListener("click", () => {
+		startGame();
+        document.querySelector(".dialogPause").remove();
+		document.querySelector(".opacity").style.display = "none";
 	});
 });
-
-let scorePlayerOne = 0;
-let scorePlayerTwo = 0;
-let currentPlayer = 0;
-let chronomètre = 30;
-let colonneSelec = null;
 
 const grille = [
 	["", "", "", "", "", "", ""],
@@ -413,36 +470,6 @@ console.log(resultat);
 resultat = checkWinner(grilleSansGagnant); // retourne ""
 console.log(resultat);
 
-const divFooter = document.querySelector(".divFooter");
 
-const timer = setInterval(() => {
-    if (chronomètre > 0) {
-        chronomètre--;
-        timerPara.textContent = `${chronomètre}s`;
-    } else if (chronomètre == 0) {
-        clearInterval(timer);
-    }
-}, 1000);
-
-function startGame() {
-    scorePlayerOne = 0;
-    scorePlayerTwo = 0;
-    currentPlayer = 0;
-    chronomètre = 30;
-    colonneSelec = null;
-    let grille = [
-        ["", "", "", "", "", "", ""],
-        ["", "", "", "", "", "", ""],
-        ["", "", "", "", "", "", ""],
-        ["", "", "", "", "", "", ""],
-        ["", "", "", "", "", "", ""],
-        ["", "", "", "", "", "", ""],
-    ];
-    let verifSecMenu = document.querySelector(".secMenu");
-
-	verifSecMenu.style.display = "none";
-
-    divFooter.style.display = "flex";
-}
 
 btnPlay.addEventListener("click", startGame)
