@@ -1,61 +1,57 @@
 const menu = document.getElementById("menu");
-const btnRules = document.querySelector(".btnRules");
 const body = document.body;
 const secMenu = document.querySelector(".secMenu");
-const dialogPause = document.querySelector(".dialogPause")
+const dialogPause = document.querySelector(".dialogPause");
 const opacity = document.querySelector(".opacity");
-
-
-
+const timerPara = document.querySelector(".chronoPointPlayer1");
 
 function createContainer(classContainer = "", idContainer = "", type) {
 	const element = document.createElement(type);
 
-    if (classContainer) element.classList.add(classContainer);
-    if (idContainer) element.id = idContainer;
-    return element
+	if (classContainer) element.classList.add(classContainer);
+	if (idContainer) element.id = idContainer;
+	return element;
 }
 
-function createText(classText = "", idText = "", texte = "",type) {
+function createText(classText = "", idText = "", texte = "", type) {
 	const element = document.createElement(type);
-    if (classText) element.classList.add(classText);
-    if (idText) element.id = idText;
+	if (classText) element.classList.add(classText);
+	if (idText) element.id = idText;
 	element.textContent = texte;
 
-    return element 
+	return element;
 }
 
 function createImg(classImg = "", idImg = "", src, alt) {
 	const img = document.createElement("img");
 
-    if (classImg) img.classList.add(classImg);
-    if (idImg) img.id = idImg;
+	if (classImg) img.classList.add(classImg);
+	if (idImg) img.id = idImg;
 	img.src = src;
 	img.alt = alt;
 
-    return img 
+	return img;
 }
 
 function secPause() {
-    const dialog = createContainer("dialogPause", "", "dialog");
+	const dialog = createContainer("dialogPause", "", "dialog");
 
-    const h2 = createText("pauseH2", "", "PAUSE", "h2")
-    dialog.appendChild(h2);
+	const h2 = createText("pauseH2", "", "PAUSE", "h2");
+	dialog.appendChild(h2);
 
-    const divBtnPause = createContainer("divBtnPause", "", "div")
-    dialog.appendChild(divBtnPause)
+	const divBtnPause = createContainer("divBtnPause", "", "div");
+	dialog.appendChild(divBtnPause);
 
-    const btnContinue = createText("btnContinue", "", "CONTINUE GAME", "button");
-    divBtnPause.appendChild(btnContinue)
+	const btnContinue = createText("btnContinue", "", "CONTINUE GAME", "button");
+	divBtnPause.appendChild(btnContinue);
 
-    const btnRestart = createText("btnRestart", "", "RESTART", "button");
-    divBtnPause.appendChild(btnRestart)
+	const btnRestart = createText("btnRestart", "", "RESTART", "button");
+	divBtnPause.appendChild(btnRestart);
 
+	const btnQuit = createText("btnQuit", "", "QUIT GAME", "button");
+	divBtnPause.appendChild(btnQuit);
 
-    const btnQuit = createText("btnQuit", "", "QUIT GAME", "button");
-    divBtnPause.appendChild(btnQuit)
-
-    body.appendChild(dialog);
+	body.appendChild(dialog);
 }
 
 function secRule() {
@@ -153,10 +149,15 @@ function sectionMenu() {
 	const secMenu = createContainer("secMenu", "", "section");
 
 	// Création de la div "divTotalMenu"
-	const divTotalMenu = createContainer("divTotalMenu", "", "div")
+	const divTotalMenu = createContainer("divTotalMenu", "", "div");
 
 	// Création de l'image du logo de base
-	const imgLogoBase = createImg("imgLogoBase", "", "./assets/logoBase.svg", "logo de base");
+	const imgLogoBase = createImg(
+		"imgLogoBase",
+		"",
+		"./assets/logoBase.svg",
+		"logo de base"
+	);
 
 	// Ajout de l'image à divTotalMenu
 	divTotalMenu.appendChild(imgLogoBase);
@@ -168,7 +169,12 @@ function sectionMenu() {
 	const btnPlay = createText("btnPlay", "", "PLAY VS PLAYER", "button");
 
 	// Ajout de l'image à ce bouton
-	const imgPlay = createImg("", "", "./assets/player-vs-player.svg", "player vs player");
+	const imgPlay = createImg(
+		"",
+		"",
+		"./assets/player-vs-player.svg",
+		"player vs player"
+	);
 
 	btnPlay.appendChild(imgPlay);
 
@@ -191,43 +197,47 @@ function sectionMenu() {
 	body.appendChild(secMenu);
 }
 
+sectionMenu()
+
+const btnRules = document.querySelector(".btnRules");
+const btnPlay = document.querySelector(".btnPlay");
 
 btnRules.addEventListener("click", () => {
-    let verifSecRules = document.querySelector(".secRule");
+	let verifSecRules = document.querySelector(".secRule");
 
-    if (!verifSecRules) {
-        secRule(); // Créer secRule uniquement si elle n'existe pas encore
-    } else {
-        verifSecRules.style.display = "flex";
-    }
+	if (!verifSecRules) {
+		secRule(); // Créer secRule uniquement si elle n'existe pas encore
+	} else {
+		verifSecRules.style.display = "flex";
+	}
 
-    document.querySelector(".secMenu").style.display = "none";
+	document.querySelector(".secMenu").style.display = "none";
 
-    // Sélectionner le bouton check après avoir créé secRule
-    const btnCheck = document.querySelector(".check");
-    
-    btnCheck.addEventListener("click", () => {
-        document.querySelector(".secRule").style.display = "none";
-        document.querySelector(".secMenu").style.display = "flex";
-    });
+	// Sélectionner le bouton check après avoir créé secRule
+	const btnCheck = document.querySelector(".check");
+
+	btnCheck.addEventListener("click", () => {
+		document.querySelector(".secRule").style.display = "none";
+		document.querySelector(".secMenu").style.display = "flex";
+	});
 });
 
 menu.addEventListener("click", () => {
-    let verifSecPause = document.querySelector(".dialogPause");
+	let verifSecPause = document.querySelector(".dialogPause");
 
-    if (!verifSecPause) {
-        opacity.style.display = "flex";
-        secPause();
-    } else {
-        verifSecPause.style.display = "flex";
-        opacity.style.display = "flex";
-    }
-    const btnContinue = document.querySelector(".btnContinue");
-    
-    btnContinue.addEventListener("click", () => {
-        document.querySelector(".dialogPause").remove();
-        document.querySelector(".opacity").style.display = "none";
-    });
+	if (!verifSecPause) {
+		opacity.style.display = "flex";
+		secPause();
+	} else {
+		verifSecPause.style.display = "flex";
+		opacity.style.display = "flex";
+	}
+	const btnContinue = document.querySelector(".btnContinue");
+
+	btnContinue.addEventListener("click", () => {
+		document.querySelector(".dialogPause").remove();
+		document.querySelector(".opacity").style.display = "none";
+	});
 });
 
 let scorePlayerOne = 0;
@@ -235,12 +245,204 @@ let scorePlayerTwo = 0;
 let currentPlayer = 0;
 let chronomètre = 30;
 let colonneSelec = null;
-const grille = [
-    [ "", "", "", "",  "", "", "" ],
-    [ "", "", "", "",  "", "", "" ],
-    [ "", "", "", "",  "", "", "" ],
-    [ "", "", "", "",  "", "", "" ],
-    [ "", "", "", "",  "", "", "" ],
-    [ "", "", "", "",  "", "", "" ]
-    ];
 
+const grille = [
+	["", "", "", "", "", "", ""],
+	["", "", "", "", "", "", ""],
+	["", "", "", "", "", "", ""],
+	["", "", "", "", "", "", ""],
+	["", "", "", "", "", "", ""],
+	["", "", "", "", "", "", ""],
+];
+
+const grilleAvecGagnant1 = [
+	["", "", "", "", "", "", ""],
+	["", "", "", "", "", "", ""],
+	["", "", "", "", "", "", ""],
+	["", "", "", "", "", "", ""],
+	["", "", "", "", "", "", ""],
+	["X", "X", "X", "X", "", "", ""],
+];
+
+const grilleAvecGagnant2 = [
+	["", "", "", "", "", "", ""],
+	["", "", "", "", "", "", ""],
+	["X", "", "", "", "", "", ""],
+	["X", "", "", "", "", "", ""],
+	["X", "", "", "", "", "", ""],
+	["X", "", "", "", "", "", ""],
+];
+
+const grilleAvecGagnant3 = [
+	["", "", "", "", "", "", ""],
+	["", "", "", "", "", "", ""],
+	["", "", "", "X", "", "", ""],
+	["", "", "X", "", "", "", ""],
+	["", "X", "", "", "", "", ""],
+	["X", "", "", "", "", "", ""],
+];
+
+const grilleAvecGagnant4 = [
+	["", "", "", "", "", "", ""],
+	["", "", "", "", "", "", ""],
+	["", "", "", "X", "", "", ""],
+	["", "", "X", "O", "", "", ""],
+	["", "O", "O", "O", "", "", ""],
+	["X", "O", "O", "O", "O", "", ""],
+];
+
+const grilleSansGagnant = [
+	["", "", "", "", "", "", ""],
+	["", "", "", "", "", "", ""],
+	["", "", "", "X", "", "", ""],
+	["", "", "X", "O", "", "", ""],
+	["", "O", "O", "O", "", "", ""],
+	["X", "O", "O", "X", "O", "", ""],
+];
+
+function checkWinner(grille) {
+	// verifie les lignes
+	for (let i = 0; i < grille.length; i++) {
+		for (let j = 0; j < grille[i].length; j++) {
+			if (j <= grille[i].length - 4) {
+				if (
+					grille[i][j] !== "" &&
+					grille[i][j] == "X" &&
+					grille[i][j + 1] == "X" &&
+					grille[i][j + 2] == "X" &&
+					grille[i][j + 3] == "X"
+				) {
+					return "X";
+				} else if (
+					grille[i][j] !== "" &&
+					grille[i][j] == "O" &&
+					grille[i][j + 1] == "O" &&
+					grille[i][j + 2] == "O" &&
+					grille[i][j + 3] == "O"
+				) {
+					return "O";
+				}
+			}
+		}
+	}
+    // verifie les colonnes
+    for (let i = 0; i < grille.length; i++) {
+		for (let j = 0; j < grille[i].length; j++) {
+			if (i <= grille[i].length - 4) {
+				if (
+					grille[i][j] !== "" &&
+					grille[i][j] == "X" &&
+					grille[i + 1][j] == "X" &&
+					grille[i + 2][j] == "X" &&
+					grille[i + 3][j] == "X"
+				) {
+					return "X";
+				} else if (
+					grille[i][j] !== "" &&
+					grille[i][j] == "O" &&
+					grille[i + 1][j] == "O" &&
+					grille[i + 2][j] == "O" &&
+					grille[i + 3][j] == "O"
+				) {
+					return "O";
+				}
+			}
+		}
+	}
+// Vérifie la diagonale montante
+for (let i = 3; i < grille.length; i++) {
+    for (let j = 0; j < grille[i].length - 3; j++) {
+        if (grille[i][j] !== "") {
+            if (
+                grille[i][j] === "X" &&
+                grille[i - 1][j + 1] === "X" &&
+                grille[i - 2][j + 2] === "X" &&
+                grille[i - 3][j + 3] === "X"
+            ) {
+                return "X";
+            } else if (
+                grille[i][j] === "O" &&
+                grille[i - 1][j + 1] === "O" &&
+                grille[i - 2][j + 2] === "O" &&
+                grille[i - 3][j + 3] === "O"
+            ) {
+                return "O";
+            }
+        }
+    }
+}
+
+// Vérifie la diagonale descendante
+for (let i = 0; i < grille.length - 3; i++) {
+    for (let j = 0; j < grille[i].length - 3; j++) {
+        if (grille[i][j] !== "") {
+            if (
+                grille[i][j] === "X" &&
+                grille[i + 1][j + 1] === "X" &&
+                grille[i + 2][j + 2] === "X" &&
+                grille[i + 3][j + 3] === "X"
+            ) {
+                return "X";
+            } else if (
+                grille[i][j] === "O" &&
+                grille[i + 1][j + 1] === "O" &&
+                grille[i + 2][j + 2] === "O" &&
+                grille[i + 3][j + 3] === "O"
+            ) {
+                return "O";
+            }
+        }
+    }
+}
+	return "null";
+}
+
+let resultat = "";
+resultat = checkWinner(grilleAvecGagnant1); // retourne "X"
+console.log(resultat);
+
+resultat = checkWinner(grilleAvecGagnant2); // retourne "X"
+console.log(resultat);
+
+resultat = checkWinner(grilleAvecGagnant3); // retourne "X"
+console.log(resultat);
+
+resultat = checkWinner(grilleAvecGagnant4); // retourne "O"
+console.log(resultat);
+
+resultat = checkWinner(grilleSansGagnant); // retourne ""
+console.log(resultat);
+
+const divFooter = document.querySelector(".divFooter");
+
+const timer = setInterval(() => {
+    if (chronomètre > 0) {
+        chronomètre--;
+        timerPara.textContent = `${chronomètre}s`;
+    } else if (chronomètre == 0) {
+        clearInterval(timer);
+    }
+}, 1000);
+
+function startGame() {
+    scorePlayerOne = 0;
+    scorePlayerTwo = 0;
+    currentPlayer = 0;
+    chronomètre = 30;
+    colonneSelec = null;
+    let grille = [
+        ["", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", ""],
+    ];
+    let verifSecMenu = document.querySelector(".secMenu");
+
+	verifSecMenu.style.display = "none";
+
+    divFooter.style.display = "flex";
+}
+
+btnPlay.addEventListener("click", startGame)
