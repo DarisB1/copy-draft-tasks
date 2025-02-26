@@ -11,6 +11,7 @@ const divChrono = document.querySelector(".chronometre");
 const joueur = document.querySelector(".chronoPlayerH2");
 const winPlayer = document.querySelector(".winPlayer");
 const spanWinPlayer = document.querySelector(".spanWinPlayer");
+const btnReplay = document.querySelector(".btnReplay");
 let scoreOne = document.querySelector(".scoreOne");
 let scoreTwo = document.querySelector(".scoreTwo");
 let scorePlayerOne = 0;
@@ -18,6 +19,7 @@ let scorePlayerTwo = 0;
 let currentPlayer = 0;
 let chronomètre = 15;
 let colonneSelec = null;
+let namePlayer;
 let timer;
 
 function startChrono() {
@@ -243,21 +245,13 @@ function sectionMenu() {
 	body.appendChild(secMenu);
 }
 
-{/*
-    <div class="winPlayer">
-    <h2 class="winH2">PLAYER <span class="spanWinPlayer">1</span></h2>
-    <p class="winP">WINS</p>
-    <button class="btnReplay">PLAY AGAIN</button>
-            </div>
-            */}
-
 function createVictoryBanner(nomDuJoueur) {
     const winPlayer = createContainer("winPlayer", "", "div");
 
     const winH2 = createText("winH2", "", "PLAYER", "h2")
     winPlayer.appendChild(winH2)
 
-    const spanWinPlayer = createText("spanWinPlayer", "", "1", "span")
+    const spanWinPlayer = createText("spanWinPlayer", "", nomDuJoueur, "span")
     winH2.appendChild(spanWinPlayer)
 
     const winP = createText("winP", "", "WINS", "p");
@@ -265,7 +259,6 @@ function createVictoryBanner(nomDuJoueur) {
 
     const btnReplay = createText("btnReplay", "", "PLAY AGAIN", "button")
     winPlayer.appendChild(btnReplay)
-
 
     body.appendChild(winPlayer)
 }
@@ -529,7 +522,18 @@ let resultat = "";
 // resultat = checkWinner(grilleSansGagnant); // retourne ""
 // console.log(resultat);
 
+function replayGame() {
+    startChrono()
 
+    grille = [
+        ["", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", ""],
+    ];
+}
 
 btnPlay.addEventListener("click", startGame)
 
@@ -591,18 +595,21 @@ function findPawnPosition(column, grid, e) {
                     console.log(resultat + " à gagné");
                     if (resultat == "X") {
                         divFooter.style.backgroundColor = "var(--player-one)"
-                        winPlayer.style.display = "flex";
+                        namePlayer = " 1";
+                        createVictoryBanner(namePlayer)
                         scorePlayerOne += 1;
                         scoreOne.textContent = scorePlayerOne;
-                        spanWinPlayer.textContent = "1";
+                        spanWinPlayer.textContent = namePlayer;
                         clearInterval(timer)
+                        btnReplay.addEventListener("click", replayGame)
 
                     }else if (resultat == "O") {
                         divFooter.style.backgroundColor = "var(--player-two)";
-                        winPlayer.style.display = "flex";
                         scorePlayerTwo += 1;
+                        namePlayer = " 2";
+                        createVictoryBanner(namePlayer)
                         scoreTwo.textContent = scorePlayerTwo;
-                        spanWinPlayer.textContent = "2";
+                        spanWinPlayer.textContent = namePlayer;
                         clearInterval(timer)
                     }
                 }
