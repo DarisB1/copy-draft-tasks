@@ -91,8 +91,22 @@ h2 {
     color: var(--black);
 }
 
+.divImgCursor {
+    position: relative;
+    width: 36.2%;
+    margin: auto;
+}
+
+.imgCursor {
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+}
+
 .secLayer {
     position: relative;
+    display: flex;
+    flex-direction: column;
 }
 
 .imgGrid {
@@ -121,6 +135,7 @@ h2 {
     border-radius: 50%;
     height: 64px;
     padding: 0;
+    background-color: transparent;
 }
 
 .imgShadowGrid {
@@ -133,12 +148,12 @@ h2 {
 .divFooter {
     display: none;
     flex-direction: column;
-    height: 250px;
+    height: 180px;
     background-color: var(--secondary-color);
     border-radius: 60px 60px 0 0;
 }
 
-.chronometre1, .chronometre2 {
+.chronometre {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -157,46 +172,14 @@ h2 {
     box-shadow: 0px 10px 0px 0px rgba(0, 0, 0, 1);
 }
 
-.chronometre2 {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    top: 90%;
-    left: 44%;
-    z-index: 3;
-    width: 12%;
-    margin: auto;
-    text-align: center;
-    background-color: var(--player-two);
-    padding: 1.5rem 0;
-    border: 3px solid black;
-    border-radius: 40px;
-    box-shadow: 0px 10px 0px 0px rgba(0, 0, 0, 1);
-}
-
-.chronoPlayer1H2 {
+.chronoPlayerH2, .spanPlayerTurn {
     font-weight: 700;
     font-size: 16px;
     line-height: 20.42px;
+    color: var(--white);
 }
 
-.chronoPlayer2H2 {
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 20.42px;
-    color: white;
-}
-
-.chronoPointPlayer1, span {
-    font-weight: 700;
-    font-size: 56px;
-    line-height: 71.46px;
-    color: white;
-}
-
-.chronoPointPlayer2, span {
+.chronoPointPlayer {
     font-weight: 700;
     font-size: 56px;
     line-height: 71.46px;
@@ -204,7 +187,7 @@ h2 {
 }
 
 .winPlayer {
-    display: flex;
+    display: none;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -222,11 +205,10 @@ h2 {
     box-shadow: 0px 10px 0px 0px rgba(0, 0, 0, 1);
 }
 
-.winH2 {
+.winH2, .spanWinPlayer {
     font-weight: 700;
     font-size: 16px;
     line-height: 20.42px;
-
 }
 
 .winP {

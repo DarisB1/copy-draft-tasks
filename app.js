@@ -3,17 +3,53 @@ const body = document.body;
 const secMenu = document.querySelector(".secMenu");
 const dialogPause = document.querySelector(".dialogPause");
 const opacity = document.querySelector(".opacity");
-const timerPara = document.querySelector(".chronoPointPlayer1");
+const timerPara = document.querySelector(".chronoPointPlayer");
 const divFooter = document.querySelector(".divFooter");
+const imgCursor = document.querySelector(".imgCursor");
+const spanPlayerTurn = document.querySelector(".spanPlayerTurn");
+const divChrono = document.querySelector(".chronometre");
+const joueur = document.querySelector(".chronoPlayerH2");
+const winPlayer = document.querySelector(".winPlayer");
+const spanWinPlayer = document.querySelector(".spanWinPlayer");
+let scoreOne = document.querySelector(".scoreOne");
+let scoreTwo = document.querySelector(".scoreTwo");
+let scorePlayerOne = 0;
+let scorePlayerTwo = 0;
+let currentPlayer = 0;
+let chronomètre = 15;
+let colonneSelec = null;
+let timer;
 
-let timer = setInterval(() => {
-    if (chronomètre > 0) {
-        chronomètre--;
-        timerPara.textContent = `${chronomètre}s`;
-    } else if (chronomètre == 0) {
-        clearInterval(timer);
-    }
-}, 1000);
+function startChrono() {
+    clearInterval(timer); // Arrêtez l'ancien intervalle
+    chronomètre = 15;
+    timerPara.textContent = `${chronomètre}s`;
+
+    // Redémarrez le chronomètre
+    timer = setInterval(() => {
+        if (chronomètre > 0) {
+            chronomètre--;
+            timerPara.textContent = `${chronomètre}s`;
+        } else {
+            startChrono();
+            if (currentPlayer % 2 == 0) {
+                imgCursor.src = "./assets/cursorYellow.svg";
+                timerPara.style.color = "var(--black)";
+                spanPlayerTurn.style.color = "var(--black)";
+                divChrono.style.backgroundColor = "var(--player-two)";
+                joueur.style.color = "var(--black)";
+
+            } else {
+                imgCursor.src = "./assets/cursorRed.svg";
+                timerPara.style.color = "var(--white)";
+                spanPlayerTurn.style.color = "var(--white)";
+                divChrono.style.backgroundColor = "var(--player-one)";
+                joueur.style.color = "var(--white)";
+            }
+            currentPlayer++;
+        }
+    }, 1000);
+}
 
 function createContainer(classContainer = "", idContainer = "", type) {
 	const element = document.createElement(type);
@@ -207,24 +243,37 @@ function sectionMenu() {
 	body.appendChild(secMenu);
 }
 
+{/*
+    <div class="winPlayer">
+    <h2 class="winH2">PLAYER <span class="spanWinPlayer">1</span></h2>
+    <p class="winP">WINS</p>
+    <button class="btnReplay">PLAY AGAIN</button>
+            </div>
+            */}
+
+function createVictoryBanner(nomDuJoueur) {
+    const winPlayer = createContainer("winPlayer", "", "div");
+
+    const winH2 = createText("winH2", "", "PLAYER", "h2")
+    winPlayer.appendChild(winH2)
+
+    const spanWinPlayer = createText("spanWinPlayer", "", "1", "span")
+    winH2.appendChild(spanWinPlayer)
+
+    const winP = createText("winP", "", "WINS", "p");
+    winPlayer.appendChild(winP)
+
+    const btnReplay = createText("btnReplay", "", "PLAY AGAIN", "button")
+    winPlayer.appendChild(btnReplay)
+
+
+    body.appendChild(winPlayer)
+}
+
 sectionMenu()
 
-let scorePlayerOne = 0;
-let scorePlayerTwo = 0;
-let currentPlayer = 0;
-let chronomètre = 15;
-let colonneSelec = null;
-
 function startGame() {
-    clearInterval(timer);
-    timer = setInterval(() => {
-        if (chronomètre > 0) {
-            chronomètre--;
-            timerPara.textContent = `${chronomètre}s`;
-        } else if (chronomètre == 0) {
-            clearInterval(timer);
-        }
-    }, 1000);
+    startChrono()
     scorePlayerOne = 0;
     scorePlayerTwo = 0;
     currentPlayer = 0;
@@ -252,14 +301,13 @@ btnRules.addEventListener("click", () => {
 	let verifSecRules = document.querySelector(".secRule");
 
 	if (!verifSecRules) {
-		secRule(); // Créer secRule uniquement si elle n'existe pas encore
+		secRule();
 	} else {
 		verifSecRules.style.display = "flex";
 	}
 
 	document.querySelector(".secMenu").style.display = "none";
 
-	// Sélectionner le bouton check après avoir créé secRule
 	const btnCheck = document.querySelector(".check");
 
 	btnCheck.addEventListener("click", () => {
@@ -287,7 +335,14 @@ menu.addEventListener("click", () => {
 	btnContinue.addEventListener("click", () => {
 		document.querySelector(".dialogPause").remove();
 		document.querySelector(".opacity").style.display = "none";
-        
+        timer = setInterval(() => {
+            if (chronomètre > 0) {
+                chronomètre--;
+                timerPara.textContent = `${chronomètre}s`;
+            } else {
+                clearInterval(timer);
+            }
+        }, 1000);
 	});
 
     btnRestart.addEventListener("click", () => {
@@ -411,6 +466,7 @@ for (let i = 3; i < grille.length; i++) {
     for (let j = 0; j < grille[i].length - 3; j++) {
         if (grille[i][j] !== "") {
             if (
+                grille[i][j] !== "" &&
                 grille[i][j] === "X" &&
                 grille[i - 1][j + 1] === "X" &&
                 grille[i - 2][j + 2] === "X" &&
@@ -418,6 +474,7 @@ for (let i = 3; i < grille.length; i++) {
             ) {
                 return "X";
             } else if (
+                grille[i][j] !== "" &&
                 grille[i][j] === "O" &&
                 grille[i - 1][j + 1] === "O" &&
                 grille[i - 2][j + 2] === "O" &&
@@ -432,8 +489,9 @@ for (let i = 3; i < grille.length; i++) {
 // Vérifie la diagonale descendante
 for (let i = 0; i < grille.length - 3; i++) {
     for (let j = 0; j < grille[i].length - 3; j++) {
-        if (grille[i][j] !== "") {
+        if (i <= grille.length - 4 && j >= 3) {
             if (
+                grille[i][j] !== "" &&
                 grille[i][j] === "X" &&
                 grille[i + 1][j + 1] === "X" &&
                 grille[i + 2][j + 2] === "X" &&
@@ -441,6 +499,7 @@ for (let i = 0; i < grille.length - 3; i++) {
             ) {
                 return "X";
             } else if (
+                grille[i][j] !== "" &&
                 grille[i][j] === "O" &&
                 grille[i + 1][j + 1] === "O" &&
                 grille[i + 2][j + 2] === "O" &&
@@ -455,21 +514,119 @@ for (let i = 0; i < grille.length - 3; i++) {
 }
 
 let resultat = "";
-resultat = checkWinner(grilleAvecGagnant1); // retourne "X"
-console.log(resultat);
+// resultat = checkWinner(grille);
+// console.log(resultat);
 
-resultat = checkWinner(grilleAvecGagnant2); // retourne "X"
-console.log(resultat);
+// resultat = checkWinner(grilleAvecGagnant2); // retourne "X"
+// console.log(resultat);
 
-resultat = checkWinner(grilleAvecGagnant3); // retourne "X"
-console.log(resultat);
+// resultat = checkWinner(grilleAvecGagnant3); // retourne "X"
+// console.log(resultat);
 
-resultat = checkWinner(grilleAvecGagnant4); // retourne "O"
-console.log(resultat);
+// resultat = checkWinner(grilleAvecGagnant4); // retourne "O"
+// console.log(resultat);
 
-resultat = checkWinner(grilleSansGagnant); // retourne ""
-console.log(resultat);
+// resultat = checkWinner(grilleSansGagnant); // retourne ""
+// console.log(resultat);
 
 
 
 btnPlay.addEventListener("click", startGame)
+
+const parent = document.querySelector(".divImgCursor");
+const divGridColumn = document.querySelectorAll(".divGridColumn");
+let y = 0;
+const parentWidth = parent.offsetWidth;
+const cursorWidth = imgCursor.offsetWidth;
+const parentWidthInPercent = parentWidth / 100;
+let gameOver = true;
+function findPawnPosition(column, grid, e) {
+    if (e.key == "ArrowLeft") {
+        y -= 15;
+        if (y < 0) {
+            y = 0;
+        }
+    } else if (e.key == "ArrowRight") {
+        y += 15;
+        if (y > 100 - (cursorWidth / parentWidthInPercent)) {
+            y = 100 - (cursorWidth / parentWidthInPercent);
+        }
+    }
+    if (gameOver == true) {
+        if (e.code == "Space") {
+        e.preventDefault();
+        const colIndex = Math.floor((y / 100) * divGridColumn.length); // en fonction de l'endroit où est le cursor, recuperer la colonne en dessous
+        column = divGridColumn[colIndex].querySelectorAll('.imgBtnGrid'); // recuperer toutes les img
+        for (let i = column.length - 1; i >= 0; i--) {
+
+            if (column[i].src && column[i].alt == "") {
+                if (currentPlayer % 2 == 0) {
+                    column[i].src = "./assets/counter-red-large.svg";
+                    column[i].alt = "pion rouge";
+                    imgCursor.src = "./assets/cursorYellow.svg";
+                    spanPlayerTurn.textContent = "1"
+                    timerPara.style.color = "var(--black)";
+                    spanPlayerTurn.style.color = "var(--black)";
+                    divChrono.style.backgroundColor = "var(--player-two)";
+                    joueur.style.color = "var(--black)";
+                    startChrono()
+                    grid[i][colIndex] = "X"
+                    
+                } else {
+                    column[i].src = "./assets/counter-yellow-large.svg";
+                    column[i].alt = "pion jaune";
+                    imgCursor.src = "./assets/cursorRed.svg";
+                    spanPlayerTurn.textContent = "2"
+                    timerPara.style.color = "var(--white)";
+                    spanPlayerTurn.style.color = "var(--white)";
+                    divChrono.style.backgroundColor = "var(--player-one)";
+                    joueur.style.color = "var(--white)";
+                    startChrono()
+                    grid[i][colIndex] = "O"
+                }
+                currentPlayer++;
+                resultat = checkWinner(grid);
+                if (resultat !== "null") {
+                    gameOver = false;
+                    console.log(resultat + " à gagné");
+                    if (resultat == "X") {
+                        divFooter.style.backgroundColor = "var(--player-one)"
+                        winPlayer.style.display = "flex";
+                        scorePlayerOne += 1;
+                        scoreOne.textContent = scorePlayerOne;
+                        spanWinPlayer.textContent = "1";
+                        clearInterval(timer)
+
+                    }else if (resultat == "O") {
+                        divFooter.style.backgroundColor = "var(--player-two)";
+                        winPlayer.style.display = "flex";
+                        scorePlayerTwo += 1;
+                        scoreTwo.textContent = scorePlayerTwo;
+                        spanWinPlayer.textContent = "2";
+                        clearInterval(timer)
+                    }
+                }
+                console.log(grid);
+                
+                break;
+            }
+        }
+    }
+}
+    imgCursor.style.left = y + "%";
+  }
+
+body.addEventListener("keydown", function(e) {
+    findPawnPosition(null, grille, e);
+});
+
+//   let result = 0;
+
+// result = findPawnPosition(0, grid) // retourne 4
+// console.log(result);
+
+// result = findPawnPosition(2, grid) // retourne 3
+// console.log(result);
+
+// result = findPawnPosition(5, grid)  // retourne 5
+// console.log(result);
