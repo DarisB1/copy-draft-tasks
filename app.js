@@ -10,12 +10,6 @@ const spanPlayerTurn = document.querySelector(".spanPlayerTurn");
 const divChrono = document.querySelector(".chronometre");
 const joueur = document.querySelector(".chronoPlayerH2");
 const divImgCursor = document.querySelector(".divImgCursor");
-const btnRules = document.querySelector(".btnRules");
-const btnPlay = document.querySelector(".btnPlay");
-const btnContinue = document.querySelector(".btnContinue");
-const btnRestart = document.querySelector(".btnRestart");
-const btnQuit = document.querySelector(".btnQuit");
-let resultat = "";
 let scoreOne = document.querySelector(".scoreOne");
 let scoreTwo = document.querySelector(".scoreTwo");
 let scorePlayerOne = 0;
@@ -318,6 +312,8 @@ function startGame() {
     divFooter.style.display = "flex";
 }
 
+const btnRules = document.querySelector(".btnRules");
+const btnPlay = document.querySelector(".btnPlay");
 
 btnRules.addEventListener("click", () => {
 	let verifSecRules = document.querySelector(".secRule");
@@ -349,6 +345,10 @@ menu.addEventListener("click", () => {
 		verifSecPause.style.display = "flex";
 		opacity.style.display = "flex";
 	}
+	const btnContinue = document.querySelector(".btnContinue");
+	const btnRestart = document.querySelector(".btnRestart");
+	const btnQuit = document.querySelector(".btnQuit");
+
 
 	btnContinue.addEventListener("click", () => {
 		document.querySelector(".dialogPause").remove();
@@ -385,14 +385,14 @@ const grille = [
 	["", "", "", "", "", "", ""],
 ];
 
-// const grilleAvecGagnant1 = [
-// 	["", "", "", "", "", "", ""],
-// 	["", "", "", "", "", "", ""],
-// 	["", "", "", "", "", "", ""],
-// 	["", "", "", "", "", "", ""],
-// 	["", "", "", "", "", "", ""],
-// 	["X", "X", "X", "X", "", "", ""],
-// ];
+const grilleAvecGagnant1 = [
+	["", "", "", "", "", "", ""],
+	["", "", "", "", "", "", ""],
+	["", "", "", "", "", "", ""],
+	["", "", "", "", "", "", ""],
+	["", "", "", "", "", "", ""],
+	["X", "X", "X", "X", "", "", ""],
+];
 
 // const grilleAvecGagnant2 = [
 // 	["", "", "", "", "", "", ""],
@@ -531,7 +531,7 @@ for (let i = 0; i < grille.length - 3; i++) {
 	return "null";
 }
    
-function VictoryPawn(line, col) {
+function getVictoryPawns(line, col) {
     const symbols = grilleAvecGagnant1[line][col];
     let pion = [[line, col]];
 
@@ -552,8 +552,11 @@ function VictoryPawn(line, col) {
     return pion.length === 4 ? pion : []; 
 }
 
-let result = VictoryPawn(5, 3);
+let result = getVictoryPawns(5, 3);
 console.log(result);
+
+
+let resultat = "";
 
 btnPlay.addEventListener("click", startGame)
 
