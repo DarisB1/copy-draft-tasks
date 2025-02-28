@@ -9,16 +9,19 @@ const imgCursor = document.querySelector(".imgCursor");
 const spanPlayerTurn = document.querySelector(".spanPlayerTurn");
 const divChrono = document.querySelector(".chronometre");
 const joueur = document.querySelector(".chronoPlayerH2");
-const winPlayer = document.querySelector(".winPlayer");
-const spanWinPlayer = document.querySelector(".spanWinPlayer");
-const btnReplay = document.querySelector(".btnReplay");
+const divImgCursor = document.querySelector(".divImgCursor");
+const btnRules = document.querySelector(".btnRules");
+const btnPlay = document.querySelector(".btnPlay");
+const btnContinue = document.querySelector(".btnContinue");
+const btnRestart = document.querySelector(".btnRestart");
+const btnQuit = document.querySelector(".btnQuit");
+let resultat = "";
 let scoreOne = document.querySelector(".scoreOne");
 let scoreTwo = document.querySelector(".scoreTwo");
 let scorePlayerOne = 0;
 let scorePlayerTwo = 0;
 let currentPlayer = 0;
 let chronomètre = 15;
-let colonneSelec = null;
 let namePlayer;
 let timer;
 
@@ -248,10 +251,10 @@ function sectionMenu() {
 function createVictoryBanner(nomDuJoueur) {
     const winPlayer = createContainer("winPlayer", "", "div");
 
-    const winH2 = createText("winH2", "", "PLAYER", "h2")
+    const winH2 = createText("winH2", "", "PLAYER ", "h2")
     winPlayer.appendChild(winH2)
 
-    const spanWinPlayer = createText("spanWinPlayer", "", nomDuJoueur, "span")
+    const spanWinPlayer = createText("spanWinPlayer", "", `${nomDuJoueur}`, "span")
     winH2.appendChild(spanWinPlayer)
 
     const winP = createText("winP", "", "WINS", "p");
@@ -261,6 +264,34 @@ function createVictoryBanner(nomDuJoueur) {
     winPlayer.appendChild(btnReplay)
 
     body.appendChild(winPlayer)
+
+    btnReplay.addEventListener("click", () => {
+        clearInterval(timer);
+        chronomètre = 15;
+        divChrono.style.display = "flex";
+        winPlayer.style.display = "none";
+        for (const row of grille) {
+            row.fill("");
+        }
+        const pionsImgs = document.querySelectorAll(".imgBtnGrid");
+        for (const pion of pionsImgs) {
+            pion.src = "";
+            pion.alt = "";
+        }
+        y = 0;
+        imgCursor.style.left = y + "%";
+        divImgCursor.style.display = "block";
+        gameOver = true;
+        currentPlayer = 0;
+        console.log(currentPlayer)
+        let lastWin = null;
+        if (lastWin == 1) {
+            currentPlayer = 1;
+        }else if (lastWin == 2) {
+            currentPlayer = 0;
+        }
+        startChrono();
+    });
 }
 
 sectionMenu()
@@ -287,8 +318,6 @@ function startGame() {
     divFooter.style.display = "flex";
 }
 
-const btnRules = document.querySelector(".btnRules");
-const btnPlay = document.querySelector(".btnPlay");
 
 btnRules.addEventListener("click", () => {
 	let verifSecRules = document.querySelector(".secRule");
@@ -320,10 +349,6 @@ menu.addEventListener("click", () => {
 		verifSecPause.style.display = "flex";
 		opacity.style.display = "flex";
 	}
-	const btnContinue = document.querySelector(".btnContinue");
-	const btnRestart = document.querySelector(".btnRestart");
-	const btnQuit = document.querySelector(".btnQuit");
-
 
 	btnContinue.addEventListener("click", () => {
 		document.querySelector(".dialogPause").remove();
@@ -360,50 +385,50 @@ const grille = [
 	["", "", "", "", "", "", ""],
 ];
 
-const grilleAvecGagnant1 = [
-	["", "", "", "", "", "", ""],
-	["", "", "", "", "", "", ""],
-	["", "", "", "", "", "", ""],
-	["", "", "", "", "", "", ""],
-	["", "", "", "", "", "", ""],
-	["X", "X", "X", "X", "", "", ""],
-];
+// const grilleAvecGagnant1 = [
+// 	["", "", "", "", "", "", ""],
+// 	["", "", "", "", "", "", ""],
+// 	["", "", "", "", "", "", ""],
+// 	["", "", "", "", "", "", ""],
+// 	["", "", "", "", "", "", ""],
+// 	["X", "X", "X", "X", "", "", ""],
+// ];
 
-const grilleAvecGagnant2 = [
-	["", "", "", "", "", "", ""],
-	["", "", "", "", "", "", ""],
-	["X", "", "", "", "", "", ""],
-	["X", "", "", "", "", "", ""],
-	["X", "", "", "", "", "", ""],
-	["X", "", "", "", "", "", ""],
-];
+// const grilleAvecGagnant2 = [
+// 	["", "", "", "", "", "", ""],
+// 	["", "", "", "", "", "", ""],
+// 	["X", "", "", "", "", "", ""],
+// 	["X", "", "", "", "", "", ""],
+// 	["X", "", "", "", "", "", ""],
+// 	["X", "", "", "", "", "", ""],
+// ];
 
-const grilleAvecGagnant3 = [
-	["", "", "", "", "", "", ""],
-	["", "", "", "", "", "", ""],
-	["", "", "", "X", "", "", ""],
-	["", "", "X", "", "", "", ""],
-	["", "X", "", "", "", "", ""],
-	["X", "", "", "", "", "", ""],
-];
+// const grilleAvecGagnant3 = [
+// 	["", "", "", "", "", "", ""],
+// 	["", "", "", "", "", "", ""],
+// 	["", "", "", "X", "", "", ""],
+// 	["", "", "X", "", "", "", ""],
+// 	["", "X", "", "", "", "", ""],
+// 	["X", "", "", "", "", "", ""],
+// ];
 
-const grilleAvecGagnant4 = [
-	["", "", "", "", "", "", ""],
-	["", "", "", "", "", "", ""],
-	["", "", "", "X", "", "", ""],
-	["", "", "X", "O", "", "", ""],
-	["", "O", "O", "O", "", "", ""],
-	["X", "O", "O", "O", "O", "", ""],
-];
+// const grilleAvecGagnant4 = [
+// 	["", "", "", "", "", "", ""],
+// 	["", "", "", "", "", "", ""],
+// 	["", "", "", "X", "", "", ""],
+// 	["", "", "X", "O", "", "", ""],
+// 	["", "O", "O", "O", "", "", ""],
+// 	["X", "O", "O", "O", "O", "", ""],
+// ];
 
-const grilleSansGagnant = [
-	["", "", "", "", "", "", ""],
-	["", "", "", "", "", "", ""],
-	["", "", "", "X", "", "", ""],
-	["", "", "X", "O", "", "", ""],
-	["", "O", "O", "O", "", "", ""],
-	["X", "O", "O", "X", "O", "", ""],
-];
+// const grilleSansGagnant = [
+// 	["", "", "", "", "", "", ""],
+// 	["", "", "", "", "", "", ""],
+// 	["", "", "", "X", "", "", ""],
+// 	["", "", "X", "O", "", "", ""],
+// 	["", "O", "O", "O", "", "", ""],
+// 	["X", "O", "O", "X", "O", "", ""],
+// ];
 
 function checkWinner(grille) {
 	// verifie les lignes
@@ -505,47 +530,74 @@ for (let i = 0; i < grille.length - 3; i++) {
 }
 	return "null";
 }
+   
+function VictoryPawn(line, col) {
+    const symbols = grilleAvecGagnant1[line][col];
+    let pion = [[line, col]];
 
-let resultat = "";
-// resultat = checkWinner(grille);
-// console.log(resultat);
-
-// resultat = checkWinner(grilleAvecGagnant2); // retourne "X"
-// console.log(resultat);
-
-// resultat = checkWinner(grilleAvecGagnant3); // retourne "X"
-// console.log(resultat);
-
-// resultat = checkWinner(grilleAvecGagnant4); // retourne "O"
-// console.log(resultat);
-
-// resultat = checkWinner(grilleSansGagnant); // retourne ""
-// console.log(resultat);
-
-function replayGame() {
-    startChrono()
-
-    grille = [
-        ["", "", "", "", "", "", ""],
-        ["", "", "", "", "", "", ""],
-        ["", "", "", "", "", "", ""],
-        ["", "", "", "", "", "", ""],
-        ["", "", "", "", "", "", ""],
-        ["", "", "", "", "", "", ""],
-    ];
+    for (let i = col - 1; i >= 0; i--) {
+        if (grilleAvecGagnant1[line][i] === symbols) {
+            pion.push([line, i]);
+        } else {
+            break;
+        }
+    }
+    for (let i = col + 1; i < 7; i++) {
+        if (grilleAvecGagnant1[line][i] === symbols) {
+            pion.push([line, i]);
+        } else {
+            break;
+        }
+    }
+    return pion.length === 4 ? pion : []; 
 }
+
+let result = VictoryPawn(5, 3);
+console.log(result);
 
 btnPlay.addEventListener("click", startGame)
 
-const parent = document.querySelector(".divImgCursor");
+const parent = divImgCursor;
 const divGridColumn = document.querySelectorAll(".divGridColumn");
 let y = 0;
 const parentWidth = parent.offsetWidth;
 const cursorWidth = imgCursor.offsetWidth;
 const parentWidthInPercent = parentWidth / 100;
 let gameOver = true;
-function findPawnPosition(column, grid, e) {
-    if (e.key == "ArrowLeft") {
+
+function findPawnPosition(colonne, grille) {
+    for (let i = grille.length - 1; i >= 0; i--) {
+      if (grille[i][colonne] === "") {
+        return i;
+      }
+    }
+    return -1;
+}
+
+
+let resultats = 0;
+
+resultats = findPawnPosition(0, grille); // retourne 4
+console.log(resultats);
+resultats = findPawnPosition(2, grille); // retourne 3
+console.log(resultats);
+resultats = findPawnPosition(5, grille); // retourne 5
+console.log(resultats);
+
+resultat = checkWinner(grilleAvecGagnant1); // retourne "X"
+console.log(resultat);
+resultat = checkWinner(grilleAvecGagnant2); // retourne "X"
+console.log(resultat);
+resultat = checkWinner(grilleAvecGagnant3); // retourne "X"
+console.log(resultat);
+resultat = checkWinner(grilleAvecGagnant4); // retourne "O"
+console.log(resultat);
+resultat = checkWinner(grilleSansGagnant); // retourne ""
+console.log(resultat);
+
+
+body.addEventListener("keydown", (e) => {
+     if (e.key == "ArrowLeft") {
         y -= 15;
         if (y < 0) {
             y = 0;
@@ -560,7 +612,7 @@ function findPawnPosition(column, grid, e) {
         if (e.code == "Space") {
         e.preventDefault();
         const colIndex = Math.floor((y / 100) * divGridColumn.length); // en fonction de l'endroit où est le cursor, recuperer la colonne en dessous
-        column = divGridColumn[colIndex].querySelectorAll('.imgBtnGrid'); // recuperer toutes les img
+        let column = divGridColumn[colIndex].querySelectorAll('.imgBtnGrid'); // recuperer toutes les img
         for (let i = column.length - 1; i >= 0; i--) {
 
             if (column[i].src && column[i].alt == "") {
@@ -568,52 +620,52 @@ function findPawnPosition(column, grid, e) {
                     column[i].src = "./assets/counter-red-large.svg";
                     column[i].alt = "pion rouge";
                     imgCursor.src = "./assets/cursorYellow.svg";
-                    spanPlayerTurn.textContent = "1"
-                    timerPara.style.color = "var(--black)";
+                    spanPlayerTurn.textContent = "2"
+                    divChrono.style.color = "var(--black)";
                     spanPlayerTurn.style.color = "var(--black)";
                     divChrono.style.backgroundColor = "var(--player-two)";
                     joueur.style.color = "var(--black)";
                     startChrono()
-                    grid[i][colIndex] = "X"
+                    grille[i][colIndex] = "X"
                     
                 } else {
                     column[i].src = "./assets/counter-yellow-large.svg";
                     column[i].alt = "pion jaune";
                     imgCursor.src = "./assets/cursorRed.svg";
-                    spanPlayerTurn.textContent = "2"
-                    timerPara.style.color = "var(--white)";
+                    spanPlayerTurn.textContent = "1"
+                    divChrono.style.color = "var(--white)";
                     spanPlayerTurn.style.color = "var(--white)";
                     divChrono.style.backgroundColor = "var(--player-one)";
                     joueur.style.color = "var(--white)";
                     startChrono()
-                    grid[i][colIndex] = "O"
+                    grille[i][colIndex] = "O"
                 }
                 currentPlayer++;
-                resultat = checkWinner(grid);
+                resultat = checkWinner(grille);
                 if (resultat !== "null") {
                     gameOver = false;
                     console.log(resultat + " à gagné");
                     if (resultat == "X") {
                         divFooter.style.backgroundColor = "var(--player-one)"
+                        divImgCursor.style.display = "none";
                         namePlayer = " 1";
                         createVictoryBanner(namePlayer)
                         scorePlayerOne += 1;
                         scoreOne.textContent = scorePlayerOne;
-                        spanWinPlayer.textContent = namePlayer;
                         clearInterval(timer)
-                        btnReplay.addEventListener("click", replayGame)
 
                     }else if (resultat == "O") {
                         divFooter.style.backgroundColor = "var(--player-two)";
                         scorePlayerTwo += 1;
                         namePlayer = " 2";
                         createVictoryBanner(namePlayer)
+                        divImgCursor.style.display = "none";
                         scoreTwo.textContent = scorePlayerTwo;
-                        spanWinPlayer.textContent = namePlayer;
+                        console.log(spanWinPlayer);
                         clearInterval(timer)
                     }
                 }
-                console.log(grid);
+                console.log(grille);
                 
                 break;
             }
@@ -621,19 +673,4 @@ function findPawnPosition(column, grid, e) {
     }
 }
     imgCursor.style.left = y + "%";
-  }
-
-body.addEventListener("keydown", function(e) {
-    findPawnPosition(null, grille, e);
 });
-
-//   let result = 0;
-
-// result = findPawnPosition(0, grid) // retourne 4
-// console.log(result);
-
-// result = findPawnPosition(2, grid) // retourne 3
-// console.log(result);
-
-// result = findPawnPosition(5, grid)  // retourne 5
-// console.log(result);

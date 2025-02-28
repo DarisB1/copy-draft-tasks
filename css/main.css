@@ -92,6 +92,7 @@ h2 {
 }
 
 .divImgCursor {
+    display: block;
     position: relative;
     width: 36.2%;
     margin: auto;
